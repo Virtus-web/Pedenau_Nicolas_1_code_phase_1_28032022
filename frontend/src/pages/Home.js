@@ -11,8 +11,8 @@ function Home() {
         <>
             <main>
                 <HeaderHome />
-                <section class="features">
-                    <h2 class="sr-only">Features</h2>
+                <section className="features">
+                    <h2 className="sr-only">Features</h2>
                     <Feature
                     icon={Chat}
                     title={"You are our #1 priority"}
