@@ -1,12 +1,16 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import LoginAction from '../redux/actions'
+import { LoginAction } from '../redux/actions'
 
 
 function Login(props) {
 
+    console.log(props)
     const { login } = props
+    console.log(login)
     const [ loginState, setLoginState ] = useState({})
+    const history = useHistory()
 
     return (
         <>
@@ -17,7 +21,9 @@ function Login(props) {
                     <form 
                     onSubmit={(e) => {
                             e.preventDefault()
-                            login(loginState)
+                            console.log(loginState)
+                            console.log(history)
+                            login(loginState, history)
                         }}>
                         <div className="input-wrapper">
                             <label htmlFor="email">Email</label>
@@ -59,8 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (loginState) => {
-            dispatch(LoginAction(loginState))
+        login: (loginState, history) => {
+            dispatch(LoginAction(loginState, history))
         }
     }
 }
