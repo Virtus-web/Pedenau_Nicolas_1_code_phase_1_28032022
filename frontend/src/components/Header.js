@@ -6,9 +6,8 @@ import { LogoutAction } from '../redux/actions'
 
 function Header(props) {
 
-    const history = useHistory()
     const { auth, logout } = props
-    console.log(auth)
+    const history = useHistory()
 
     return (
         <nav className="main-nav">
@@ -21,16 +20,15 @@ function Header(props) {
                 <h1 className="sr-only">Argent Bank</h1>
             </a>
             <div>
-                {console.log(auth)}
                 {
-                    !auth ? (
+                    !auth.isLogin ? (
                         <a className="main-nav-item" href="/login">
                             <i className="fa fa-user-circle"></i>
                             Login
                         </a>
                     ) : (
                         <>
-                            <h2>{auth.profile.email}</h2>
+                            <h2>Tony</h2>
                             <a className="main-nav-item" href="/profile" onClick={() => logout(history)}>
                                 <i className="fa fa-user-circle"></i>
                                 Logout
@@ -46,7 +44,7 @@ function Header(props) {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.authState
+        auth: state
     }
 }
 

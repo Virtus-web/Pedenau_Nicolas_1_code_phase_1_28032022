@@ -6,9 +6,7 @@ import { LoginAction } from '../redux/actions'
 
 function Login(props) {
 
-    console.log(props)
     const { login } = props
-    console.log(login)
     const [ loginState, setLoginState ] = useState({})
     const history = useHistory()
 
@@ -22,7 +20,6 @@ function Login(props) {
                     onSubmit={(e) => {
                             e.preventDefault()
                             console.log(loginState)
-                            console.log(history)
                             login(loginState, history)
                         }}>
                         <div className="input-wrapper">
@@ -43,11 +40,6 @@ function Login(props) {
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        {/* <a href="/profile" className="sign-in-button"
-                        onClick={(e) => {
-                            e.preventDefault
-                            console.log(user)
-                        }}>Sign In</a> */}
                         <button type="submit" className="sign-in-button">Sign In</button>
                     </form>
                 </section>

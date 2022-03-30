@@ -1,12 +1,17 @@
 import Account from '../components/Account'
+import { connect } from 'react-redux'
+import { getProfileAction } from '../redux/actions'
 
 
-function Profile() {
+function Profile(props) {
+
+    // const { session } = props
+    console.log(props)
 
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
+                <h1>Welcome back<br />{props.session.isLogin}</h1>
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>
@@ -29,4 +34,19 @@ function Profile() {
     )
 }
 
-export default Profile
+
+const mapStateToProps = (state) => {
+    return {
+        session: state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProfile: () => {
+            dispatch(getProfileAction())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
