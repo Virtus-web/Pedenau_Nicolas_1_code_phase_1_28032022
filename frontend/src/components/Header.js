@@ -1,13 +1,13 @@
 import Logo from '../assets/argentBankLogo.png'
 import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { LogoutAction } from '../redux/actions'
+import { useSelector } from 'react-redux'
+import { LogoutAction } from '../redux/actions/loginAction'
 
 
-function Header(props) {
+function Header() {
 
-    const { auth, logout } = props
     const history = useHistory()
+    const login = useSelector((state) => state.login.profile)
 
     return (
         <nav className="main-nav">
@@ -21,7 +21,7 @@ function Header(props) {
             </a>
             <div>
                 {
-                    !auth.isLogin ? (
+                    !login.isLogin ? (
                         <a className="main-nav-item" href="/login">
                             <i className="fa fa-user-circle"></i>
                             Login
@@ -29,7 +29,7 @@ function Header(props) {
                     ) : (
                         <>
                             <h2>Tony</h2>
-                            <a className="main-nav-item" href="/profile" onClick={() => logout(history)}>
+                            <a className="main-nav-item" href="/profile" onClick={() => LogoutAction(history)}>
                                 <i className="fa fa-user-circle"></i>
                                 Logout
                             </a>
@@ -41,19 +41,4 @@ function Header(props) {
     )
 }
 
-
-const mapStateToProps = (state) => {
-    return {
-        auth: state
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logout: (history) => {
-            dispatch(LogoutAction(history))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

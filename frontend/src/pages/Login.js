@@ -1,12 +1,18 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { LoginAction } from '../redux/actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { LoginAction } from '../redux/actions/loginAction'
+import { getProfileAction } from '../redux/actions/profileAction'
 
 
-function Login(props) {
+function Login() {
 
-    const { login } = props
+    const dispatch = useDispatch()
+    const login = useSelector((state) => state.login.profile)
+    const profile = useSelector((state) => state.profile.profileData)
+    console.log(login)
+    console.log(profile)
+    // const { LoginAction } = props
     const [ loginState, setLoginState ] = useState({})
     const history = useHistory()
 
@@ -20,7 +26,9 @@ function Login(props) {
                     onSubmit={(e) => {
                             e.preventDefault()
                             console.log(loginState)
-                            login(loginState, history)
+                            // LoginAction(loginState, history)
+                            dispatch(LoginAction(loginState, history))
+                            dispatch(getProfileAction(profile.profileData))
                         }}>
                         <div className="input-wrapper">
                             <label htmlFor="email">Email</label>
@@ -49,18 +57,18 @@ function Login(props) {
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        profile: state
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         profile: state
+//     }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: (loginState, history) => {
-            dispatch(LoginAction(loginState, history))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         LoginAction: (loginState, history) => {
+//             dispatch(LoginAction(loginState, history))
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

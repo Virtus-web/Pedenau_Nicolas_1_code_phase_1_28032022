@@ -1,17 +1,73 @@
 import Account from '../components/Account'
-import { connect } from 'react-redux'
-import { getProfileAction } from '../redux/actions'
+// import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+// import { getProfileAction } from '../redux/actions/profileAction'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 
-function Profile(props) {
+function Profile() {
 
-    // const { session } = props
-    console.log(props)
+    // const history = useHistory()
+    // const dispatch = useDispatch()
+    const profile = useSelector((state) => state.profile.profileData)
+    // const { firstName, lastName } = profile.data.body
+    console.log(profile)
+    // dispatch(getProfileAction(profile.profileData, history))
+    // dispatch(getProfileAction(profile.profileData))
+
+    //Convertir ce useEffect en Action Redux
+    const [ profileData, setProfileData ] = useState({})
+    const userToken = JSON.parse(localStorage.getItem("auth"))
+
+    //Essayer avec async/await ou try/catch
+    useEffect(() => {
+        // async function axiosData() {
+        //     try {
+        //         const response = await axios.post("/profile", profile, {
+        //             headers: {
+        //                 "Authorization": `Bearer ${userToken.profile.body.token}`,
+        //                 "content-type": "application/json; charset=utf-8"
+        //             }
+        //         })
+        //         setProfileData(response)
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // }
+        //     axiosData()
+        axios.post("/profile", profile, {
+            headers: {
+                "Authorization": `Bearer ${userToken.profile.body.token}`,
+                "content-type": "application/json; charset=utf-8"
+            }
+        })
+        .then((response) => {
+            setProfileData(response)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [profile, userToken.profile.body.token])
+
+    console.log(profileData.data.body)
+    // const { firstName, lastName } = profileData.data.body
+    //Convertir ce useEffect en Action Redux
 
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />{props.session.isLogin}</h1>
+            {
+                profileData ? (
+                    <>
+                        <h1>Welcome back<br />{profileData.data.body.firstName} {profileData.data.body.lastName}</h1>
+                    </>
+                ) : (
+                    <>
+                        <h1>Welcome back<br />{profile.data.body.firstName} {profile.data.body.lastName}</h1>
+                    </>
+                )
+            }
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>
@@ -35,18 +91,4 @@ function Profile(props) {
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        session: state
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getProfile: () => {
-            dispatch(getProfileAction())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default Profile
