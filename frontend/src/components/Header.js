@@ -8,6 +8,9 @@ function Header() {
 
     const history = useHistory()
     const login = useSelector((state) => state.login.profile)
+    const state = useSelector((state) => state)
+    console.log(login)
+    console.log(state)
 
     return (
         <nav className="main-nav">
@@ -21,7 +24,7 @@ function Header() {
             </a>
             <div>
                 {
-                    !login.isLogin ? (
+                    !state.login.isLogin ? (
                         <a className="main-nav-item" href="/login">
                             <i className="fa fa-user-circle"></i>
                             Login

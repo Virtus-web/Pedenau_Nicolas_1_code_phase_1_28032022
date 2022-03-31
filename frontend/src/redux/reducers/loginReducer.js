@@ -11,25 +11,25 @@ const authState = {
 }
 
 
-// const getAuthState = () => {
-//     const auth = localStorage.getItem("auth")
-//     try {
-//         const authObj = JSON.parse(auth)
-//         const { expires_at, jwttoken } = authObj.profile
-//         if (new Date(expires_at) > new Date()) {
-//             axios.defaults.headers.common["Authorization"] = `Bearer ${jwttoken}`
-//             return authObj
-//         }
-//         return authState
+const getAuthState = () => {
+    const auth = localStorage.getItem("auth")
+    try {
+        const authObj = JSON.parse(auth)
+        const { expires_at, jwttoken } = authObj.profile
+        if (new Date(expires_at) > new Date()) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${jwttoken}`
+            return authObj
+        }
+        return authState
 
-//     } catch (error) {
-//         return authState
-//     }
-// }
+    } catch (error) {
+        return authState
+    }
+}
 
-// const newAuth = getAuthState()
+const newAuth = getAuthState()
 
-const loginReducer = (state = authState, action) => {
+const loginReducer = (state = newAuth, action) => {
     switch (action.type) {
 
         case LOGIN_SUCCESS:

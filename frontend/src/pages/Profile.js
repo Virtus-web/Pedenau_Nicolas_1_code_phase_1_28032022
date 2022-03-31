@@ -11,49 +11,8 @@ function Profile() {
     // const history = useHistory()
     // const dispatch = useDispatch()
     const profile = useSelector((state) => state.profile.profileData)
-    // const { firstName, lastName } = profile.data.body
     console.log(profile)
-    // dispatch(getProfileAction(profile.profileData, history))
-    // dispatch(getProfileAction(profile.profileData))
 
-    //Convertir ce useEffect en Action Redux
-    // const [ profileData, setProfileData ] = useState({})
-    // const userToken = JSON.parse(localStorage.getItem("auth"))
-
-    // //Essayer avec async/await ou try/catch
-    // useEffect(() => {
-    //     // async function axiosData() {
-    //     //     try {
-    //     //         const response = await axios.post("/profile", profile, {
-    //     //             headers: {
-    //     //                 "Authorization": `Bearer ${userToken.profile.body.token}`,
-    //     //                 "content-type": "application/json; charset=utf-8"
-    //     //             }
-    //     //         })
-    //     //         setProfileData(response)
-    //     //     } catch (error) {
-    //     //         console.log(error)
-    //     //     }
-    //     // }
-    //     //     axiosData()
-    //     axios.post("/profile", profile, {
-    //         headers: {
-    //             "Authorization": `Bearer ${userToken.profile.body.token}`,
-    //             "content-type": "application/json; charset=utf-8"
-    //         }
-    //     })
-    //     .then((response) => {
-    //         console.log(response)
-    //         setProfileData(response)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     })
-    // }, [profile, userToken.profile.body.token])
-
-    // console.log(profile.data.data.body)
-    // const { firstName, lastName } = profileData.data.body
-    //Convertir ce useEffect en Action Redux
 
     return (
         <main className="main bg-dark">
