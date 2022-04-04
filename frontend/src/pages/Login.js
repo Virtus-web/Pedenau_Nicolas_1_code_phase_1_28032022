@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { LoginAction } from '../redux/actions/loginAction'
-import { getProfileAction } from '../redux/actions/profileAction'
+// import { getProfileAction } from '../redux/actions/profileAction'
 
 
 function Login() {
@@ -28,7 +28,7 @@ function Login() {
                             console.log(loginState)
                             // LoginAction(loginState, history)
                             dispatch(LoginAction(loginState, history))
-                            dispatch(getProfileAction(profile.profileData))
+                            // dispatch(getProfileAction(profile.profileData))
                         }}>
                         <div className="input-wrapper">
                             <label htmlFor="email">Email</label>

@@ -3,15 +3,15 @@ import axios from 'axios'
 
 
 
-export const getProfileAction = (profileState) => {
+export const getProfileAction = () => {
     
     return async (dispatch) => {
         const userToken = JSON.parse(localStorage.getItem("auth"))
-        console.log(userToken.profile.body.token)
+        console.log(userToken)
         try {
-            const data = await axios.post("/profile", profileState, {
+            const data = await axios.post("/profile", null, {
                 headers: {
-                    "Authorization": `Bearer ${userToken.profile.body.token}`,
+                    "Authorization": `Bearer ${userToken.profile?.body.token}`,
                     "content-type": "application/json; charset=utf-8"
                 }
             })
