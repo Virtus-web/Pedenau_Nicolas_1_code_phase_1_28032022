@@ -28,17 +28,25 @@ const reducerProfile = (state = profileState, action) => {
             }
 
         case AXIOS_GET_SUCCESS:
-            axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
-            localStorage.setItem('userData', JSON.stringify(state))
-            console.log(action.payload)
-
-            return {
-                //Attention le fait d'ajouter des curly B ça engendre un objet vide dès le départ dans le state
+            const loginGetData = {
                 ...state,
                 isLoading: false,
                 profileData: action.payload,
                 error: ''
             }
+            axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
+            console.log(action.payload.jwttoken)
+            localStorage.setItem('userData', JSON.stringify(loginGetData))
+
+            return loginGetData
+
+            // return {
+            //     //Attention le fait d'ajouter des curly B ça engendre un objet vide dès le départ dans le state
+            //     ...state,
+            //     isLoading: false,
+            //     profileData: action.payload,
+            //     error: ''
+            // }
             
         case AXIOS_GET_ERROR:
             return {

@@ -16,8 +16,6 @@ const loginState = {
 //REDUCER
 const reducerLogin = (state = loginState, action) => {
 
-    console.log(state)
-
     if (localStorage.getItem('userData')) {
         state = JSON.parse(localStorage.getItem('userData'))
     }
@@ -32,7 +30,7 @@ const reducerLogin = (state = loginState, action) => {
         case AXIOS_LOGIN_SUCCESS:
             axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
             localStorage.setItem('userData', JSON.stringify(state))
-            console.log(action.payload)
+            console.log(action.payload.jwttoken)
 
             return {
                 ...state,

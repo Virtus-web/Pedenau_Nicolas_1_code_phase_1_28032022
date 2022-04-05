@@ -6,8 +6,9 @@ import { axiosGetData } from '../redux/actions/profileAction'
 
 function Profile() {
 
-    const profile = useSelector((state) => state.profile.profileData)
-    console.log(profile.data?.data.body.firstName)
+    const profile = useSelector((state) => state.profile)
+    // console.log(profile.data?.data.body.firstName)
+    console.log(profile)
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
     

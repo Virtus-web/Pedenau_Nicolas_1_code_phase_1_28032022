@@ -15,6 +15,7 @@ function Login() {
     
     const [ loginData, setloginData ] = useState([])
     const history = useHistory()
+    console.log(loginData)
 
 
     const loginAxiosUser = user.isLoading ? (

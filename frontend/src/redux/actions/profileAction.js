@@ -27,7 +27,7 @@ export const axiosGetDataError = error => {
 
 export const axiosGetData = () => {
     return dispatch => {
-        const userToken = JSON.parse(localStorage.getItem("auth"))
+        const userToken = JSON.parse(localStorage.getItem('userData'))
         console.log(userToken)
 
         dispatch(axiosGetDataLoading())
@@ -39,7 +39,7 @@ export const axiosGetData = () => {
         })
         .then(res => {
             const userDataArray = res
-            console.log(res.data)
+            console.log(res)
             dispatch(axiosGetDataSuccess(userDataArray))
             // history.push("/profile")
         })
