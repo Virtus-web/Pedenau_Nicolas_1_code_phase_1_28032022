@@ -7,10 +7,10 @@ import { useSelector } from 'react-redux'
 function Header() {
 
     // const history = useHistory()
-    const user = useSelector((state) => state.user.profile)
-    const state = useSelector((state) => state.profile)
+    const user = useSelector((state) => state.user)
+    const login = useSelector((state) => state.profile)
     console.log(user)
-    console.log(state)
+    console.log(login)
 
     return (
         <nav className="main-nav">

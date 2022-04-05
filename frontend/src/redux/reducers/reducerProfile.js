@@ -2,7 +2,7 @@ import { AXIOS_GET_LOADING, AXIOS_GET_SUCCESS, AXIOS_GET_ERROR } from '../type'
 import axios from 'axios'
 
 
-const initialState = {
+const profileState = {
     isLoading: false,
     status: "",
     message: "",
@@ -12,9 +12,8 @@ const initialState = {
 
 
 //REDUCER
-const reducerProfile = (state = initialState, action) => {
+const reducerProfile = (state = profileState, action) => {
 
-    console.log(action)
     console.log(state)
 
     if (localStorage.getItem('userData')) {
@@ -31,6 +30,7 @@ const reducerProfile = (state = initialState, action) => {
         case AXIOS_GET_SUCCESS:
             axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
             localStorage.setItem('userData', JSON.stringify(state))
+            console.log(action.payload)
 
             return {
                 //Attention le fait d'ajouter des curly B ça engendre un objet vide dès le départ dans le state

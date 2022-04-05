@@ -2,7 +2,7 @@ import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR } from '../
 import axios from 'axios'
 
 
-const initialState = {
+const loginState = {
     isLogin: false,
     isLoading: false,
     profile: {
@@ -14,9 +14,8 @@ const initialState = {
 
 
 //REDUCER
-const reducerLogin = (state = initialState.profile, action) => {
+const reducerLogin = (state = loginState, action) => {
 
-    console.log(action.payload)
     console.log(state)
 
     if (localStorage.getItem('userData')) {
@@ -33,12 +32,13 @@ const reducerLogin = (state = initialState.profile, action) => {
         case AXIOS_LOGIN_SUCCESS:
             axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
             localStorage.setItem('userData', JSON.stringify(state))
+            console.log(action.payload)
 
             return {
                 ...state,
                 isLogin: true,
                 isLoading: false,
-                profile: action.payload.password,
+                profile: action.payload,
                 error: ''
             }
             

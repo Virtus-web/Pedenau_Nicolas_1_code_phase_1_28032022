@@ -22,16 +22,13 @@ export const axiosLoginError = error => {
     }    
 }
 
-
-// const GOOGLE_API_KEY = 'AIzaSyB2LTF8YTA3YHNkNKk0p5Bh9rmhjkLnvug'
-
 export const axiosLogin = (loginState, history) => {
     return dispatch => {
         dispatch(axiosLoginLoading())
         axios.post("/login", loginState)
         .then(res => {
             const logDataArray = res
-            console.log(res.data)
+            console.log(res)
             dispatch(axiosLoginSuccess(logDataArray))
             history.push("/profile")
         })
