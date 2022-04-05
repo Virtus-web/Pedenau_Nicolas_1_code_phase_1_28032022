@@ -1,8 +1,9 @@
-import { GET_SUCCESS } from '../type'
-// import axios from 'axios'
+import { AXIOS_GET_LOADING, AXIOS_GET_SUCCESS, AXIOS_GET_ERROR } from '../type'
 
 
 const profileState = {
+    isLogin: false,
+    isLoading: false,
     status: "",
     message: "",
     profileData: {
@@ -12,28 +13,53 @@ const profileState = {
         createdAt: "",
         updatedAt: "",
         id: ""
-    }
+    },
+    error: ''
 }
 
 
-const profileReducer = (state = profileState, action) => {
+//REDUCER
+const reducerProfile = (state = profileState, action) => {
+
+    if (localStorage.getItem('userInfos')) {
+        state = JSON.parse(localStorage.getItem('userInfos'))
+    }
+
     switch (action.type) {
 
-        case GET_SUCCESS:
-            // const userToken = JSON.parse(localStorage.getItem("auth"))
-            // axios.defaults.headers.common["Authorization"] = `Bearer ${userToken.profile.body.token}`
-            const loginProfileState = {
+        case AXIOS_GET_LOADING:
+            const getStateLoad = {
                 ...state,
-                profileData: action.payload
+                isLoading: true
             }
-            console.log(action)
-            // localStorage.setItem("user", JSON.stringify(loginProfileState))
-            return loginProfileState
+            return getStateLoad
 
-        default:
-            return state
+        case AXIOS_GET_SUCCESS:
+            const getStateSuccess = {
+                ...state,
+                isLogin: true,
+                isLoading: false,
+                profileData: action.payload,
+                error: ''
+            }
+            // axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.jwttoken}`
+            // console.log(action.payload.jwttoken)
+            localStorage.setItem('userInfos', JSON.stringify(getStateSuccess))
+
+            return getStateSuccess
+            
+        case AXIOS_GET_ERROR:
+            const getStateError = {
+                ...state,
+                isLogin: false,
+                isLoading: false,
+                profile: {},
+                error: action.payload.error
+            }
+            return getStateError
+
+        default: return state
     }
 }
 
-
-export default profileReducer
+export default reducerProfile

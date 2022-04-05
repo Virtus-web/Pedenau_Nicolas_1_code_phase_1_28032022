@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { LoginAction } from '../redux/actions/loginAction'
-// import { getProfileAction } from '../redux/actions/profileAction'
+import { useDispatch } from 'react-redux'
+import { axiosLogin } from '../redux/actions/loginAction'
 
 
 function Login() {
 
     const dispatch = useDispatch()
-    const login = useSelector((state) => state.login.profile)
-    const profile = useSelector((state) => state.profile.profileData)
-    console.log(login)
-    console.log(profile)
-    // const { LoginAction } = props
+    
     const [ loginState, setLoginState ] = useState({})
     const history = useHistory()
 
@@ -25,10 +20,7 @@ function Login() {
                     <form 
                     onSubmit={(e) => {
                             e.preventDefault()
-                            console.log(loginState)
-                            // LoginAction(loginState, history)
-                            dispatch(LoginAction(loginState, history))
-                            // dispatch(getProfileAction(profile.profileData))
+                            dispatch(axiosLogin(loginState, history))
                         }}>
                         <div className="input-wrapper">
                             <label htmlFor="email">Email</label>
@@ -55,20 +47,5 @@ function Login() {
         </>
     )
 }
-
-
-// const mapStateToProps = (state) => {
-//     return {
-//         profile: state
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         LoginAction: (loginState, history) => {
-//             dispatch(LoginAction(loginState, history))
-//         }
-//     }
-// }
 
 export default Login
