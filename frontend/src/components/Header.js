@@ -1,15 +1,15 @@
 import Logo from '../assets/argentBankLogo.png'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { LogoutAction } from '../redux/actions/loginAction'
+// import { LogoutAction } from '../redux/actions/loginAction'
 
 
 function Header() {
 
-    const history = useHistory()
-    const login = useSelector((state) => state.login.profile)
-    const state = useSelector((state) => state)
-    console.log(login)
+    // const history = useHistory()
+    const user = useSelector((state) => state.user.profile)
+    const state = useSelector((state) => state.profile)
+    console.log(user)
     console.log(state)
 
     return (
@@ -24,7 +24,7 @@ function Header() {
             </a>
             <div>
                 {
-                    !state.login.isLogin ? (
+                    !user.isLogin ? (
                         <a className="main-nav-item" href="/login">
                             <i className="fa fa-user-circle"></i>
                             Login
@@ -32,7 +32,8 @@ function Header() {
                     ) : (
                         <>
                             <h2>Tony</h2>
-                            <a className="main-nav-item" href="/profile" onClick={() => LogoutAction(history)}>
+                            {/* <a className="main-nav-item" href="/profile" onClick={() => LogoutAction(history)}> */}
+                            <a className="main-nav-item" href="/profile">
                                 <i className="fa fa-user-circle"></i>
                                 Logout
                             </a>
