@@ -1,12 +1,13 @@
 import Logo from '../assets/argentBankLogo.png'
-// import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-// import { LogoutAction } from '../redux/actions/loginAction'
+import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutAction } from '../redux/actions/loginAction'
 
 
 function Header() {
 
-    // const history = useHistory()
+    const history = useHistory()
+    const dispatch = useDispatch()
     const user = useSelector((state) => state.login)
     const log = JSON.parse(localStorage.getItem('userData'))
 
@@ -30,8 +31,8 @@ function Header() {
                     ) : (
                         <>
                             <h2>Tony</h2>
-                            {/* <a className="main-nav-item" href="/profile" onClick={() => LogoutAction(history)}> */}
-                            <a className="main-nav-item" href="/profile">
+                            <a className="main-nav-item" href="/" onClick={() => dispatch(logoutAction(history))}>
+                            {/* <a className="main-nav-item" href="/profile"> */}
                                 <i className="fa fa-user-circle"></i>
                                 Logout
                             </a>

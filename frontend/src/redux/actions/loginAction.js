@@ -1,4 +1,4 @@
-import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR } from '../type'
+import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR, LOGOUT } from '../type'
 import axios from 'axios'
 
 
@@ -36,3 +36,21 @@ export const axiosLogin = (loginState, history) => {
         })
     }
 }
+
+export const logoutAction = (history) => {
+    return {
+        type: LOGOUT,
+    }
+}
+
+//  return async (dispatch) => {
+//         try {
+//             const res = await axios.get("/profile")
+//             const { data } = res
+//             dispatch({type: LOGOUT_SUCCESS, payload: data.message})
+//             history.push("/")
+//         } catch (error) {
+//             console.log(error)
+//             dispatch({type: LOGOUT_FAIL, payload: {}})
+//         }
+//     }

@@ -1,4 +1,4 @@
-import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR } from '../type'
+import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR, LOGOUT } from '../type'
 // import axios from 'axios'
 
 
@@ -31,7 +31,9 @@ const authState = {
 
 // const newAuth = getAuthState()
 
+
 const loginReducer = (state = authState, action) => {
+
     switch (action.type) {
 
         case AXIOS_LOGIN_LOADING:
@@ -63,6 +65,11 @@ const loginReducer = (state = authState, action) => {
                 error: action.payload.error
             }
             return loginStateError
+
+        case LOGOUT:
+            localStorage.clear()
+            // localStorage.removeItem('userData', 'userInfos')
+            return state
 
         default: return state
     }
