@@ -33,6 +33,11 @@ function Profile() {
 
     const [ updateState, setUpdateState ] = useState({})
 
+    // const clearForm = () => {
+    //     document.getElementById('reset').reset()
+    //     // console.log(document.form['reset'][0].reset())
+    // }
+
 
     return (
         <main className="main bg-dark">
@@ -46,12 +51,14 @@ function Profile() {
                     e.preventDefault()
                     dispatch(axiosUpdateData(updateState))
                     handleEditClose()
+                    document.getElementById('reset').reset()
+                    // clearForm()
                 }}>
                     <div className='input-container'>
                         <div className="input-wrapper">
                             <input
                             type="text"
-                            id="email"
+                            id="firstName"
                             placeholder='firstname'
                             onChange={(e) => {
                                 const firstName = e.target.value
@@ -62,7 +69,7 @@ function Profile() {
                         <div className="input-wrapper">
                             <input
                             type="text"
-                            id="email"
+                            id="lastName"
                             placeholder='lastname'
                             onChange={(e) => {
                                 const lastName = e.target.value
