@@ -9,6 +9,7 @@ function Header() {
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.login)
+    const profile = useSelector((state) => state.profile)
     const log = JSON.parse(localStorage.getItem('userData'))
 
     return (
@@ -30,9 +31,8 @@ function Header() {
                         </a>
                     ) : (
                         <>
-                            <h2>Tony</h2>
+                            <h2>{profile.profileData.data?.body.firstName}</h2>
                             <a className="main-nav-item" href="/" onClick={() => dispatch(logoutAction(history))}>
-                            {/* <a className="main-nav-item" href="/profile"> */}
                                 <i className="fa fa-user-circle"></i>
                                 Logout
                             </a>

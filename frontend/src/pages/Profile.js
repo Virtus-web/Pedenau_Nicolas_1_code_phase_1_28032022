@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Account from '../components/Account'
 import { useSelector, useDispatch } from 'react-redux'
 import { axiosGetData } from '../redux/actions/profileAction'
+import { axiosUpdateData } from '../redux/actions/updateAction'
 
 
 function Profile() {
@@ -15,14 +16,66 @@ function Profile() {
             dispatch(axiosGetData())
         } 
          
-    }, [user.isLogin, dispatch])    
+    }, [user.isLogin, dispatch]) 
+    
+    const [ open, setOpen ] = useState('')
+    const [ close, setClose ] = useState('active')
+
+    const handleEditOpen = () => {
+        setOpen('active')
+        setClose('')
+    }
+
+    const handleEditClose = () => {
+        setClose('active')
+        setOpen('')
+    }
+
+    const [ updateState, setUpdateState ] = useState({})
 
 
     return (
         <main className="main bg-dark">
             <div className="header">
                 <h1>Welcome back<br />{profile.profileData.data?.body.firstName} {profile.profileData.data?.body.lastName}</h1>   
-                <button className="edit-button">Edit Name</button>
+                <button className={`edit-button ${open}`} onClick={() => handleEditOpen()}>Edit Name</button>
+                <form
+                id='reset'
+                className={`update-form ${close}`} 
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    dispatch(axiosUpdateData(updateState))
+                    handleEditClose()
+                }}>
+                    <div className='input-container'>
+                        <div className="input-wrapper">
+                            <input
+                            type="text"
+                            id="email"
+                            placeholder='firstname'
+                            onChange={(e) => {
+                                const firstName = e.target.value
+                                setUpdateState({ ...updateState, ...{firstName}})
+                            }}
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <input
+                            type="text"
+                            id="email"
+                            placeholder='lastname'
+                            onChange={(e) => {
+                                const lastName = e.target.value
+                                setUpdateState({ ...updateState, ...{lastName}})
+                            }}
+                            />
+                        </div>
+                    </div>
+                    <div className='button-container'>
+                        <button type="submit" className="save-in-button">Save</button>
+                        <a href='/profile' onClick={() => handleEditClose()}>Cancel</a>   
+                    </div>
+                </form>
             </div>
             <h2 className="sr-only">Accounts</h2>
             <Account
