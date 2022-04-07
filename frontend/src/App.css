@@ -222,6 +222,15 @@ main {
     margin-bottom: 1rem;
 }
 
+@media (min-width: 280px) {
+    .sign-in-content {
+        width: 100%;
+    }
+    .input-wrapper label {
+        text-align: center;
+    }
+}
+
 .input-wrapper label {
     font-weight: bold;
 }
