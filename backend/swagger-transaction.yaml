@@ -16,9 +16,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Transactions
       summary: User Profile API
-      description: API for Login
+      description: API for getting all user transactions
       parameters:
         - in: header
           type: "array"
@@ -27,12 +27,12 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-        - in: body
-          name: body
-          description: Login Payload
-          required: true
-          schema:
-            $ref: '#/definitions/Transactions'
+        # - in: body
+        #   name: body
+        #   description: Transactions Payload
+        #   required: true
+        #   schema:
+        #     $ref: '#/definitions/Transactions'
       produces:
         - application/json
       responses:
@@ -40,6 +40,7 @@ paths:
           description: User transactions retrieved successully
           schema:
             $ref: '#/definitions/API-response'
+            # $ref: '#/definitions/Transactions'
         '400':
           description: Invalid Fields
         '500':
@@ -51,9 +52,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Transactions
       summary: Find transaction by ID
-      description: API for fetching a user profile
+      description: API for getting one user transaction
       parameters:
         - name: "transactionId"
           in: "path"
@@ -86,9 +87,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Transactions
       summary: Find transaction by ID
-      description: API for updating a transaction
+      description: API for adding details transaction
       parameters:
         - name: "transactionId"
           in: "path"
@@ -105,7 +106,7 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update user profile attributes
+          description: Add user transaction details
           required: true
           schema:
             $ref: '#/definitions/Transaction-details'
@@ -113,7 +114,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User transaction details added successully
           schema:
             $ref: '#/definitions/API-response'
         '400':
@@ -127,9 +128,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Transactions
       summary: Find transaction by ID
-      description: API for updating a transaction
+      description: API for updating details transaction
       parameters:
         - name: "transactionId"
           in: "path"
@@ -146,7 +147,7 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update user profile attributes
+          description: Update user transaction details
           required: true
           schema:
             $ref: '#/definitions/Transaction-details'
@@ -154,7 +155,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User transaction details updated successully
           schema:
             $ref: '#/definitions/API-response'
         '400':
@@ -169,9 +170,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Transactions
       summary: Find transaction by ID
-      description: API for deleting a transaction
+      description: API for deleting transaction details
       parameters:
         - name: "transactionId"
           in: "path"
@@ -190,7 +191,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User transaction details deleted successully
           schema:
             $ref: '#/definitions/API-response'
         '400':
@@ -208,20 +209,20 @@ securityDefinitions:
     
     
 definitions:
-  Transactions:
-    properties:
-      date:
-        type: string
-        description: when the transaction was made
-      description:
-        type: string
-        description: transaction detail
-      amount:
-        type: number
-        description: transaction amount
-      balance:
-        type: number
-        description: balance amount
+  # Transactions:
+  #   properties:
+  #     date:
+  #       type: string
+  #       description: when the transaction was made
+  #     description:
+  #       type: string
+  #       description: transaction detail
+  #     amount:
+  #       type: number
+  #       description: transaction amount
+  #     balance:
+  #       type: number
+  #       description: balance amount
         
         
   Transaction-details:
@@ -243,6 +244,23 @@ definitions:
         type: "string"
       message:
         type: "string"
+      body:
+        type: object
+        properties:
+          date:
+            type: string
+            description: when the transaction was made
+          description:
+            type: string
+            description: transaction detail
+          amount:
+            type: number
+            description: transaction amount
+          balance:
+            type: number
+            description: balance amount
+            
+            
         
   # ApiResponse:
   #   type: object
