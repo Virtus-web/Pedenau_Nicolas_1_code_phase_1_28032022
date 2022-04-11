@@ -1,5 +1,5 @@
 import { AXIOS_LOGIN_LOADING, AXIOS_LOGIN_SUCCESS, AXIOS_LOGIN_ERROR, LOGOUT } from '../type'
-import axios from 'axios'
+import { login } from '../api-service/userService'
 
 
 export const axiosLoginLoading = () => {
@@ -25,7 +25,7 @@ export const axiosLoginError = error => {
 export const axiosLogin = (loginState, history) => {
     return dispatch => {
         dispatch(axiosLoginLoading())
-        axios.post("/login", loginState)
+        login(loginState)
         .then(res => {
             const logDataArray = res
             dispatch(axiosLoginSuccess(logDataArray))

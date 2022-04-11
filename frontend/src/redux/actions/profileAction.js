@@ -1,5 +1,5 @@
 import { AXIOS_GET_LOADING, AXIOS_GET_SUCCESS, AXIOS_GET_ERROR } from '../type'
-import axios from 'axios'
+import { profile } from '../api-service/userService'
 
 
 export const axiosGetDataLoading = () => {
@@ -24,15 +24,8 @@ export const axiosGetDataError = error => {
 
 export const axiosGetData = () => {
     return dispatch => {
-        const userToken = JSON.parse(localStorage.getItem('userData'))
-
         dispatch(axiosGetDataLoading())
-        axios.post("/profile", null, {
-            headers: {
-                "Authorization": `Bearer ${userToken.profile?.data.body.token}`,
-                "content-type": "application/json; charset=utf-8"
-            }
-        })
+        profile()
         .then(res => {
             const userDataArray = res
             dispatch(axiosGetDataSuccess(userDataArray))

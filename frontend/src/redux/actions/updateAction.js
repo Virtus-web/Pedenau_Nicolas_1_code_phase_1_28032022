@@ -1,5 +1,5 @@
 import { AXIOS_UPDATE_LOADING, AXIOS_UPDATE_SUCCESS, AXIOS_UPDATE_ERROR } from '../type'
-import axios from 'axios'
+import { update } from '../api-service/userService'
 
 
 export const axiosUpdateDataLoading = () => {
@@ -24,15 +24,8 @@ export const axiosUpdateDataError = error => {
 
 export const axiosUpdateData = (updateState) => {
     return dispatch => {
-        const userToken = JSON.parse(localStorage.getItem('userData'))
-
         dispatch(axiosUpdateDataLoading())
-        axios.put("/profile", updateState, {
-            headers: {
-                "Authorization": `Bearer ${userToken.profile?.data.body.token}`,
-                "content-type": "application/json; charset=utf-8"
-            }
-        })
+        update(updateState)
         .then(res => {
             const userDataArray = res
             dispatch(axiosUpdateDataSuccess(userDataArray))
