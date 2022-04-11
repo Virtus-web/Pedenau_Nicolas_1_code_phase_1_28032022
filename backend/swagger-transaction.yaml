@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Bank Argent API documentation
+  title: Bank Argent API documentation for phase 2
   description: Contains all available API endpoints in this codebase
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'

@@ -2,7 +2,6 @@ import { AXIOS_UPDATE_LOADING, AXIOS_UPDATE_SUCCESS, AXIOS_UPDATE_ERROR } from '
 
 
 const updateState = {
-    isLogin: true,
     isLoading: false,
     status: "",
     message: "",
@@ -14,7 +13,7 @@ const updateState = {
         updatedAt: "",
         id: ""
     },
-    error: ''
+    error: ""
 }
 
 
@@ -52,7 +51,6 @@ const updateReducer = (state = updateState, action) => {
         case AXIOS_UPDATE_ERROR:
             const updateStateError = {
                 ...state,
-                isLogin: false,
                 isLoading: false,
                 profile: {},
                 error: action.payload.error
