@@ -1,0 +1,284 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation for phase 2
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+
+paths:
+
+  /user/transactions:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: User Profile API
+      description: API for getting all user transactions
+      parameters:
+        - in: header
+          type: "array"
+          items:
+            type: "string"
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        # - in: body
+        #   name: body
+        #   description: Transactions Payload
+        #   required: true
+        #   schema:
+        #     $ref: '#/definitions/Transactions'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions retrieved successully
+          schema:
+            $ref: '#/definitions/API-response'
+            # $ref: '#/definitions/Transactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+          
+  /user/transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Find transaction by ID
+      description: API for getting one user transaction
+      parameters:
+        - name: "transactionId"
+          in: "path"
+          description: "ID of transaction"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: header
+          type: "array"
+          items:
+            type: "string"
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transaction retrieved successully
+          schema:
+            $ref: '#/definitions/API-response'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+          
+          
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Find transaction by ID
+      description: API for adding details transaction
+      parameters:
+        - name: "transactionId"
+          in: "path"
+          description: "ID of transaction"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: header
+          type: "array"
+          items:
+            type: "string"
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Add user transaction details
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction-details'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transaction details added successully
+          schema:
+            $ref: '#/definitions/API-response'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+          
+          
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Find transaction by ID
+      description: API for updating details transaction
+      parameters:
+        - name: "transactionId"
+          in: "path"
+          description: "ID of transaction"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: header
+          type: "array"
+          items:
+            type: "string"
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Update user transaction details
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction-details'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transaction details updated successully
+          schema:
+            $ref: '#/definitions/API-response'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+          
+          
+          
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Find transaction by ID
+      description: API for deleting transaction details
+      parameters:
+        - name: "transactionId"
+          in: "path"
+          description: "ID of transaction"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: header
+          type: "array"
+          items:
+            type: "string"
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transaction details deleted successully
+          schema:
+            $ref: '#/definitions/API-response'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+          
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    
+    
+    
+definitions:
+  # Transactions:
+  #   properties:
+  #     date:
+  #       type: string
+  #       description: when the transaction was made
+  #     description:
+  #       type: string
+  #       description: transaction detail
+  #     amount:
+  #       type: number
+  #       description: transaction amount
+  #     balance:
+  #       type: number
+  #       description: balance amount
+        
+        
+  Transaction-details:
+    type: object
+    properties:
+      category:
+        type: string
+      notes:
+        type: string
+        
+        
+  API-response:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+      body:
+        type: object
+        properties:
+          date:
+            type: string
+            description: when the transaction was made
+          description:
+            type: string
+            description: transaction detail
+          amount:
+            type: number
+            description: transaction amount
+          balance:
+            type: number
+            description: balance amount
+            
+            
+        
+  # ApiResponse:
+  #   type: object
+  #   properties:
+  #     status:
+  #       type: integer
+  #     message:
+  #       type: string
+  #     body:
+  #       type: object
+  #       properties:
+  #         id:
+  #           type: integer
+  #         date:
+  #           type: string
+  #         description:
+  #           type: string
+  #         amount:
+  #           type: number
+  #         balance:
+  #           type: number

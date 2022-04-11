@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import { connect } from 'react-redux'
-import LoginAction from '../redux/actions'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { axiosLogin } from '../redux/actions/loginAction'
 
 
-function Login(props) {
+function Login() {
 
-    const { login } = props
+    const dispatch = useDispatch()
+    
     const [ loginState, setLoginState ] = useState({})
+    const history = useHistory()
 
     return (
         <>
@@ -17,7 +20,7 @@ function Login(props) {
                     <form 
                     onSubmit={(e) => {
                             e.preventDefault()
-                            login(loginState)
+                            dispatch(axiosLogin(loginState, history))
                         }}>
                         <div className="input-wrapper">
                             <label htmlFor="email">Email</label>
@@ -37,11 +40,6 @@ function Login(props) {
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        {/* <a href="/profile" className="sign-in-button"
-                        onClick={(e) => {
-                            e.preventDefault
-                            console.log(user)
-                        }}>Sign In</a> */}
                         <button type="submit" className="sign-in-button">Sign In</button>
                     </form>
                 </section>
@@ -50,19 +48,4 @@ function Login(props) {
     )
 }
 
-
-const mapStateToProps = (state) => {
-    return {
-        profile: state
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: (loginState) => {
-            dispatch(LoginAction(loginState))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
